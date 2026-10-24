@@ -1,0 +1,828 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-24T15:29:26+00:00",
+  "title": "Design System: TabGroups",
+  "extensions": {
+    "colorMeta": {
+      "night": {
+        "role": "neutral",
+        "displayName": "Night",
+        "canonical": "oklch(12.6% 0.022 276)",
+        "tonalRamp": [
+          "oklch(15% 0.022 276)",
+          "oklch(25% 0.022 276)",
+          "oklch(36% 0.022 276)",
+          "oklch(47% 0.022 276)",
+          "oklch(58% 0.022 276)",
+          "oklch(70% 0.022 276)",
+          "oklch(82% 0.022 276)",
+          "oklch(95% 0.022 276)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Raised Night",
+        "canonical": "oklch(18.2% 0.037 277)",
+        "tonalRamp": [
+          "oklch(15% 0.037 277)",
+          "oklch(25% 0.037 277)",
+          "oklch(36% 0.037 277)",
+          "oklch(47% 0.037 277)",
+          "oklch(58% 0.037 277)",
+          "oklch(70% 0.037 277)",
+          "oklch(82% 0.037 277)",
+          "oklch(95% 0.037 277)"
+        ]
+      },
+      "night-body": {
+        "role": "neutral",
+        "displayName": "Night Body",
+        "canonical": "oklch(78.6% 0.040 281)",
+        "tonalRamp": [
+          "oklch(15% 0.040 281)",
+          "oklch(25% 0.040 281)",
+          "oklch(36% 0.040 281)",
+          "oklch(47% 0.040 281)",
+          "oklch(58% 0.040 281)",
+          "oklch(70% 0.040 281)",
+          "oklch(82% 0.040 281)",
+          "oklch(95% 0.040 281)"
+        ]
+      },
+      "night-dim": {
+        "role": "neutral",
+        "displayName": "Night Dim",
+        "canonical": "oklch(66.8% 0.044 281)",
+        "tonalRamp": [
+          "oklch(15% 0.044 281)",
+          "oklch(25% 0.044 281)",
+          "oklch(36% 0.044 281)",
+          "oklch(47% 0.044 281)",
+          "oklch(58% 0.044 281)",
+          "oklch(70% 0.044 281)",
+          "oklch(82% 0.044 281)",
+          "oklch(95% 0.044 281)"
+        ]
+      },
+      "night-quiet": {
+        "role": "neutral",
+        "displayName": "Night Quiet",
+        "canonical": "oklch(50.7% 0.056 280)",
+        "tonalRamp": [
+          "oklch(15% 0.056 280)",
+          "oklch(25% 0.056 280)",
+          "oklch(36% 0.056 280)",
+          "oklch(47% 0.056 280)",
+          "oklch(58% 0.056 280)",
+          "oklch(70% 0.056 280)",
+          "oklch(82% 0.056 280)",
+          "oklch(95% 0.056 280)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(96.8% 0.004 286)",
+        "tonalRamp": [
+          "oklch(15% 0.004 286)",
+          "oklch(25% 0.004 286)",
+          "oklch(36% 0.004 286)",
+          "oklch(47% 0.004 286)",
+          "oklch(58% 0.004 286)",
+          "oklch(70% 0.004 286)",
+          "oklch(82% 0.004 286)",
+          "oklch(95% 0.004 286)"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Card",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(25% 0.000 90)",
+          "oklch(36% 0.000 90)",
+          "oklch(47% 0.000 90)",
+          "oklch(58% 0.000 90)",
+          "oklch(70% 0.000 90)",
+          "oklch(82% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "paper-ink": {
+        "role": "neutral",
+        "displayName": "Paper Ink",
+        "canonical": "oklch(17.9% 0.006 286)",
+        "tonalRamp": [
+          "oklch(15% 0.006 286)",
+          "oklch(25% 0.006 286)",
+          "oklch(36% 0.006 286)",
+          "oklch(47% 0.006 286)",
+          "oklch(58% 0.006 286)",
+          "oklch(70% 0.006 286)",
+          "oklch(82% 0.006 286)",
+          "oklch(95% 0.006 286)"
+        ]
+      },
+      "paper-body": {
+        "role": "neutral",
+        "displayName": "Paper Body",
+        "canonical": "oklch(48.9% 0.016 286)",
+        "tonalRamp": [
+          "oklch(15% 0.016 286)",
+          "oklch(25% 0.016 286)",
+          "oklch(36% 0.016 286)",
+          "oklch(47% 0.016 286)",
+          "oklch(58% 0.016 286)",
+          "oklch(70% 0.016 286)",
+          "oklch(82% 0.016 286)",
+          "oklch(95% 0.016 286)"
+        ]
+      },
+      "paper-quiet": {
+        "role": "neutral",
+        "displayName": "Paper Quiet",
+        "canonical": "oklch(64.0% 0.015 286)",
+        "tonalRamp": [
+          "oklch(15% 0.015 286)",
+          "oklch(25% 0.015 286)",
+          "oklch(36% 0.015 286)",
+          "oklch(47% 0.015 286)",
+          "oklch(58% 0.015 286)",
+          "oklch(70% 0.015 286)",
+          "oklch(82% 0.015 286)",
+          "oklch(95% 0.015 286)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Periwinkle",
+        "canonical": "oklch(71.5% 0.151 279)",
+        "tonalRamp": [
+          "oklch(15% 0.151 279)",
+          "oklch(25% 0.151 279)",
+          "oklch(36% 0.151 279)",
+          "oklch(47% 0.151 279)",
+          "oklch(58% 0.151 279)",
+          "oklch(70% 0.151 279)",
+          "oklch(82% 0.151 279)",
+          "oklch(95% 0.151 279)"
+        ]
+      },
+      "accent-hi": {
+        "role": "primary",
+        "displayName": "Lit Periwinkle",
+        "canonical": "oklch(79.6% 0.105 281)",
+        "tonalRamp": [
+          "oklch(15% 0.105 281)",
+          "oklch(25% 0.105 281)",
+          "oklch(36% 0.105 281)",
+          "oklch(47% 0.105 281)",
+          "oklch(58% 0.105 281)",
+          "oklch(70% 0.105 281)",
+          "oklch(82% 0.105 281)",
+          "oklch(95% 0.105 281)"
+        ]
+      },
+      "on-accent": {
+        "role": "primary",
+        "displayName": "Periwinkle Ink",
+        "canonical": "oklch(17.8% 0.058 276)",
+        "tonalRamp": [
+          "oklch(15% 0.058 276)",
+          "oklch(25% 0.058 276)",
+          "oklch(36% 0.058 276)",
+          "oklch(47% 0.058 276)",
+          "oklch(58% 0.058 276)",
+          "oklch(70% 0.058 276)",
+          "oklch(82% 0.058 276)",
+          "oklch(95% 0.058 276)"
+        ]
+      },
+      "grad-mist": {
+        "role": "secondary",
+        "displayName": "Gradient Mist",
+        "canonical": "oklch(87.1% 0.065 282)",
+        "tonalRamp": [
+          "oklch(15% 0.065 282)",
+          "oklch(25% 0.065 282)",
+          "oklch(36% 0.065 282)",
+          "oklch(47% 0.065 282)",
+          "oklch(58% 0.065 282)",
+          "oklch(70% 0.065 282)",
+          "oklch(82% 0.065 282)",
+          "oklch(95% 0.065 282)"
+        ]
+      },
+      "grad-violet": {
+        "role": "secondary",
+        "displayName": "Gradient Violet",
+        "canonical": "oklch(74.0% 0.169 305)",
+        "tonalRamp": [
+          "oklch(15% 0.169 305)",
+          "oklch(25% 0.169 305)",
+          "oklch(36% 0.169 305)",
+          "oklch(47% 0.169 305)",
+          "oklch(58% 0.169 305)",
+          "oklch(70% 0.169 305)",
+          "oklch(82% 0.169 305)",
+          "oklch(95% 0.169 305)"
+        ]
+      },
+      "grad-ember": {
+        "role": "secondary",
+        "displayName": "Gradient Ember",
+        "canonical": "oklch(79.0% 0.130 46)",
+        "tonalRamp": [
+          "oklch(15% 0.130 46)",
+          "oklch(25% 0.130 46)",
+          "oklch(36% 0.130 46)",
+          "oklch(47% 0.130 46)",
+          "oklch(58% 0.130 46)",
+          "oklch(70% 0.130 46)",
+          "oklch(82% 0.130 46)",
+          "oklch(95% 0.130 46)"
+        ]
+      },
+      "glow": {
+        "role": "secondary",
+        "displayName": "Stage Glow",
+        "canonical": "oklch(44.3% 0.180 274)",
+        "tonalRamp": [
+          "oklch(15% 0.180 274)",
+          "oklch(25% 0.180 274)",
+          "oklch(36% 0.180 274)",
+          "oklch(47% 0.180 274)",
+          "oklch(58% 0.180 274)",
+          "oklch(70% 0.180 274)",
+          "oklch(82% 0.180 274)",
+          "oklch(95% 0.180 274)"
+        ]
+      },
+      "wall-top": {
+        "role": "tertiary",
+        "displayName": "Night Wall",
+        "canonical": "oklch(27.4% 0.099 272)",
+        "tonalRamp": [
+          "oklch(15% 0.099 272)",
+          "oklch(25% 0.099 272)",
+          "oklch(36% 0.099 272)",
+          "oklch(47% 0.099 272)",
+          "oklch(58% 0.099 272)",
+          "oklch(70% 0.099 272)",
+          "oklch(82% 0.099 272)",
+          "oklch(95% 0.099 272)"
+        ]
+      },
+      "wall-mid": {
+        "role": "tertiary",
+        "displayName": "Deep Ultramarine",
+        "canonical": "oklch(35.5% 0.150 276)",
+        "tonalRamp": [
+          "oklch(15% 0.150 276)",
+          "oklch(25% 0.150 276)",
+          "oklch(36% 0.150 276)",
+          "oklch(47% 0.150 276)",
+          "oklch(58% 0.150 276)",
+          "oklch(70% 0.150 276)",
+          "oklch(82% 0.150 276)",
+          "oklch(95% 0.150 276)"
+        ]
+      },
+      "wall-low": {
+        "role": "tertiary",
+        "displayName": "Violet Dusk",
+        "canonical": "oklch(39.7% 0.152 291)",
+        "tonalRamp": [
+          "oklch(15% 0.152 291)",
+          "oklch(25% 0.152 291)",
+          "oklch(36% 0.152 291)",
+          "oklch(47% 0.152 291)",
+          "oklch(58% 0.152 291)",
+          "oklch(70% 0.152 291)",
+          "oklch(82% 0.152 291)",
+          "oklch(95% 0.152 291)"
+        ]
+      },
+      "apricot": {
+        "role": "tertiary",
+        "displayName": "Apricot Horizon",
+        "canonical": "oklch(76.0% 0.154 47)",
+        "tonalRamp": [
+          "oklch(15% 0.154 47)",
+          "oklch(25% 0.154 47)",
+          "oklch(36% 0.154 47)",
+          "oklch(47% 0.154 47)",
+          "oklch(58% 0.154 47)",
+          "oklch(70% 0.154 47)",
+          "oklch(82% 0.154 47)",
+          "oklch(95% 0.154 47)"
+        ]
+      },
+      "sky": {
+        "role": "tertiary",
+        "displayName": "Morning Sky",
+        "canonical": "oklch(71.4% 0.158 247)",
+        "tonalRamp": [
+          "oklch(15% 0.158 247)",
+          "oklch(25% 0.158 247)",
+          "oklch(36% 0.158 247)",
+          "oklch(47% 0.158 247)",
+          "oklch(58% 0.158 247)",
+          "oklch(70% 0.158 247)",
+          "oklch(82% 0.158 247)",
+          "oklch(95% 0.158 247)"
+        ]
+      },
+      "wall-glass": {
+        "role": "tertiary",
+        "displayName": "Wall Glass",
+        "canonical": "oklch(21.9% 0.083 273) / 0.45",
+        "tonalRamp": [
+          "oklch(15% 0.083 273)",
+          "oklch(25% 0.083 273)",
+          "oklch(36% 0.083 273)",
+          "oklch(47% 0.083 273)",
+          "oklch(58% 0.083 273)",
+          "oklch(70% 0.083 273)",
+          "oklch(82% 0.083 273)",
+          "oklch(95% 0.083 273)"
+        ]
+      },
+      "hint-dim": {
+        "role": "tertiary",
+        "displayName": "Hint Periwinkle",
+        "canonical": "oklch(81.1% 0.076 281)",
+        "tonalRamp": [
+          "oklch(15% 0.076 281)",
+          "oklch(25% 0.076 281)",
+          "oklch(36% 0.076 281)",
+          "oklch(47% 0.076 281)",
+          "oklch(58% 0.076 281)",
+          "oklch(70% 0.076 281)",
+          "oklch(82% 0.076 281)",
+          "oklch(95% 0.076 281)"
+        ]
+      },
+      "indigo": {
+        "role": "tertiary",
+        "displayName": "Signal Indigo",
+        "canonical": "oklch(56.9% 0.215 274)",
+        "tonalRamp": [
+          "oklch(15% 0.200 274)",
+          "oklch(25% 0.200 274)",
+          "oklch(36% 0.200 274)",
+          "oklch(47% 0.200 274)",
+          "oklch(58% 0.200 274)",
+          "oklch(70% 0.200 274)",
+          "oklch(82% 0.200 274)",
+          "oklch(95% 0.200 274)"
+        ]
+      },
+      "indigo-hi": {
+        "role": "tertiary",
+        "displayName": "Lit Indigo",
+        "canonical": "oklch(66.8% 0.178 277)",
+        "tonalRamp": [
+          "oklch(15% 0.178 277)",
+          "oklch(25% 0.178 277)",
+          "oklch(36% 0.178 277)",
+          "oklch(47% 0.178 277)",
+          "oklch(58% 0.178 277)",
+          "oklch(70% 0.178 277)",
+          "oklch(82% 0.178 277)",
+          "oklch(95% 0.178 277)"
+        ]
+      },
+      "ink": {
+        "role": "tertiary",
+        "displayName": "Window Ink",
+        "canonical": "oklch(23.2% 0.004 286)",
+        "tonalRamp": [
+          "oklch(15% 0.004 286)",
+          "oklch(25% 0.004 286)",
+          "oklch(36% 0.004 286)",
+          "oklch(47% 0.004 286)",
+          "oklch(58% 0.004 286)",
+          "oklch(70% 0.004 286)",
+          "oklch(82% 0.004 286)",
+          "oklch(95% 0.004 286)"
+        ]
+      },
+      "ink-2": {
+        "role": "tertiary",
+        "displayName": "Window Grey",
+        "canonical": "oklch(47.7% 0.016 281)",
+        "tonalRamp": [
+          "oklch(15% 0.016 281)",
+          "oklch(25% 0.016 281)",
+          "oklch(36% 0.016 281)",
+          "oklch(47% 0.016 281)",
+          "oklch(58% 0.016 281)",
+          "oklch(70% 0.016 281)",
+          "oklch(82% 0.016 281)",
+          "oklch(95% 0.016 281)"
+        ]
+      },
+      "surface": {
+        "role": "tertiary",
+        "displayName": "Window Paper",
+        "canonical": "oklch(97.7% 0.003 286)",
+        "tonalRamp": [
+          "oklch(15% 0.003 286)",
+          "oklch(25% 0.003 286)",
+          "oklch(36% 0.003 286)",
+          "oklch(47% 0.003 286)",
+          "oklch(58% 0.003 286)",
+          "oklch(70% 0.003 286)",
+          "oklch(82% 0.003 286)",
+          "oklch(95% 0.003 286)"
+        ]
+      },
+      "bar-top": {
+        "role": "tertiary",
+        "displayName": "Bar Light",
+        "canonical": "oklch(95.9% 0.004 286)",
+        "tonalRamp": [
+          "oklch(15% 0.004 286)",
+          "oklch(25% 0.004 286)",
+          "oklch(36% 0.004 286)",
+          "oklch(47% 0.004 286)",
+          "oklch(58% 0.004 286)",
+          "oklch(70% 0.004 286)",
+          "oklch(82% 0.004 286)",
+          "oklch(95% 0.004 286)"
+        ]
+      },
+      "bar-bottom": {
+        "role": "tertiary",
+        "displayName": "Bar Shade",
+        "canonical": "oklch(92.6% 0.007 286)",
+        "tonalRamp": [
+          "oklch(15% 0.007 286)",
+          "oklch(25% 0.007 286)",
+          "oklch(36% 0.007 286)",
+          "oklch(47% 0.007 286)",
+          "oklch(58% 0.007 286)",
+          "oklch(70% 0.007 286)",
+          "oklch(82% 0.007 286)",
+          "oklch(95% 0.007 286)"
+        ]
+      },
+      "hair": {
+        "role": "tertiary",
+        "displayName": "Hairline",
+        "canonical": "oklch(0.0% 0.000 0) / 0.09",
+        "tonalRamp": [
+          "oklch(15% 0.000 0)",
+          "oklch(25% 0.000 0)",
+          "oklch(36% 0.000 0)",
+          "oklch(47% 0.000 0)",
+          "oklch(58% 0.000 0)",
+          "oklch(70% 0.000 0)",
+          "oklch(82% 0.000 0)",
+          "oklch(95% 0.000 0)"
+        ]
+      },
+      "strip": {
+        "role": "tertiary",
+        "displayName": "Strip Graphite",
+        "canonical": "oklch(26.9% 0.017 271) / 0.93",
+        "tonalRamp": [
+          "oklch(15% 0.017 271)",
+          "oklch(25% 0.017 271)",
+          "oklch(36% 0.017 271)",
+          "oklch(47% 0.017 271)",
+          "oklch(58% 0.017 271)",
+          "oklch(70% 0.017 271)",
+          "oklch(82% 0.017 271)",
+          "oklch(95% 0.017 271)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The two-line hero headline only; one phrase may take the Headline Gradient."
+      },
+      "display-close": {
+        "displayName": "Display Close",
+        "purpose": "The two-line closing call; one phrase may take the Headline Gradient."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Two-tone section headings (claim in full ink, quieter half in Quiet)."
+      },
+      "stat": {
+        "displayName": "Stat",
+        "purpose": "The four numbers in the hands section, in Lit Periwinkle, unit at 0.4em."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Bento card titles; story step titles at 650."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Hero and closing ledes in Night Body, max 34em."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Card bodies, built points, stat and shortcut captions, story lines."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Meta/version lines and nav links."
+      },
+      "chrome": {
+        "displayName": "Chrome",
+        "purpose": "Window titles, mac menu bar and tab labels inside the desktop frames."
+      }
+    },
+    "shadows": [
+      {
+        "name": "window",
+        "value": "0 0 0 0.5px #0000004d, 0 24px 56px #0a0e3a80, 0 4px 14px #0a0e3a40",
+        "purpose": "Every window in the laptop and the try desktop."
+      },
+      {
+        "name": "mini-window",
+        "value": "0 0 0 0.5px #00000040, 0 10px 24px #0a0e3a66",
+        "purpose": "Miniature windows in the bento art."
+      },
+      {
+        "name": "strip",
+        "value": "0 0 0 0.5px #ffffff26, 0 -4px 18px #0a0e3a40",
+        "purpose": "The tab strip, cast upward onto the wallpaper."
+      },
+      {
+        "name": "laptop-lid",
+        "value": "inset 0 0 0 1.5px #3c3d45, 0 30px 80px #000c",
+        "purpose": "The CSS laptop lid."
+      },
+      {
+        "name": "laptop-base",
+        "value": "0 16px 30px #000d",
+        "purpose": "The CSS laptop base."
+      },
+      {
+        "name": "card-ring",
+        "value": "0 0 0 1px #0000000d, 0 1px 2px #0000000a",
+        "purpose": "Bento cards on Paper; nothing lifts on Paper."
+      },
+      {
+        "name": "night-ring",
+        "value": "inset 0 0 0 1px #ffffff14",
+        "purpose": "Shortcut tiles on Night (#ffffff1a on the try panel)."
+      },
+      {
+        "name": "keycap-dark",
+        "value": "inset 0 1px 0 #ffffff1f, 0 2px 0 #00000080",
+        "purpose": "A dark key's own bottom edge in the shortcut tiles."
+      },
+      {
+        "name": "keycap-light",
+        "value": "0 2px 0 #9fa1ad, 0 3px 6px #0a0e3a40",
+        "purpose": "Light keys in the desktop art; pressed: 0 1px 0 #9fa1ad, 0 0 0 2px #7c85ff."
+      },
+      {
+        "name": "icon-glow",
+        "value": "drop-shadow(0 18px 40px #5561f266)",
+        "purpose": "filter on the app icon in the hero and closing call."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The one easing for everything that travels."
+      },
+      {
+        "name": "glide",
+        "value": "0.5s",
+        "purpose": "Windows and strips moving and resizing."
+      },
+      {
+        "name": "settle",
+        "value": "0.25s",
+        "purpose": "Button lift and press."
+      },
+      {
+        "name": "state",
+        "value": "0.15s",
+        "purpose": "Tab, link and hint-button colour changes."
+      },
+      {
+        "name": "step-fade",
+        "value": "0.4s",
+        "purpose": "Story steps dimming and lighting; lines light over 0.3s."
+      },
+      {
+        "name": "drop-in",
+        "value": "0.2s, scale 0.98 to 1",
+        "purpose": "The drop highlight and the key HUD appearing."
+      },
+      {
+        "name": "loop",
+        "value": "6s infinite",
+        "purpose": "Group, switch and pull-out bento art; grab nudges over 4s."
+      },
+      {
+        "name": "scroll-story",
+        "value": "420vh (380vh at <=900px), sticky under the 56px nav",
+        "purpose": "Scroll progress 0-1 drives the laptop scene; steps at 0-0.49, 0.49-0.72, 0.72-1."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "bento-2col",
+        "value": "1060px"
+      },
+      {
+        "name": "story-stack",
+        "value": "900px"
+      },
+      {
+        "name": "phone",
+        "value": "640px"
+      },
+      {
+        "name": "coarse-pointer",
+        "value": "(pointer: coarse)"
+      }
+    ],
+    "gradients": [
+      {
+        "name": "headline",
+        "value": "linear-gradient(92deg, #cdd0ff 0%, #8f97ff 36%, #c48cff 66%, #ff9f70 100%)",
+        "purpose": "Clipped to one marked phrase in the hero and closing headlines."
+      },
+      {
+        "name": "wallpaper",
+        "value": "radial-gradient(140% 38% at 62% 112%, #ff9a5ef0 0%, #ff8f5599 34%, #ff8f5500 70%), radial-gradient(60% 50% at 6% -6%, #3fa9ff66 0%, #3fa9ff00 70%), radial-gradient(55% 70% at 62% 38%, #6a46d466 0%, #6a46d400 72%), linear-gradient(168deg, #182057 0%, #2b2b88 48%, #4b2f90 100%)",
+        "purpose": "Laptop screen, bento art strip, try panel. Never a band."
+      },
+      {
+        "name": "stage-glow",
+        "value": "radial-gradient(55% 50% at 50% 28%, #3b40b459, #3b40b400 72%), radial-gradient(35% 30% at 72% 18%, #ff9f7026, #ff9f7000 72%)",
+        "purpose": "Behind the hero; the closing call swaps in an ember pool from below."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Download, in the hero and the closing call. The only filled button.",
+      "html": "<a class=\"ds-btn\" href=\"#\"><svg viewBox='0 0 16 16' width='18' height='18' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.25h10'/></svg>Download for Mac</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 28px;border-radius:999px;background:#8f97ff;color:#0b0d2a;font:650 17px/1 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif;text-decoration:none;transition:transform .25s cubic-bezier(.16,1,.3,1),background-color .2s}.ds-btn:hover{background:#b0b5ff;transform:translateY(-1px)}.ds-btn:active{transform:translateY(.5px)}.ds-btn:focus-visible{outline:2px solid #8f97ff;outline-offset:3px}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "The hero's secondary action beside the pill.",
+      "html": "<a class=\"ds-link\" href=\"#\">See how it works<svg viewBox='0 0 16 16' width='18' height='18' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><circle cx='8' cy='8' r='7'/><path d='M8 4.5v7M4.75 8.25 8 11.5l3.25-3.25'/></svg></a>",
+      "css": ".ds-link{display:inline-flex;align-items:center;gap:8px;color:#b0b5ff;font:600 17px/1 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif;text-decoration:none;transition:color .15s}.ds-link:hover{color:#fff}.ds-link:focus-visible{outline:2px solid #8f97ff;outline-offset:3px;border-radius:6px}"
+    },
+    {
+      "name": "Nav Bar",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky black bar: brand, anchors, language pill, small Download pill.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\"><span class=\"ds-ico\"></span>TabGroups</a><nav><a href=\"#\">Features</a><a href=\"#\">How it works</a><a href=\"#\">FAQ</a><a href=\"#\">GitHub</a><a class=\"ds-lang\" href=\"#\">中文</a></nav><a class=\"ds-small\" href=\"#\">Download</a></header>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:28px;height:56px;padding:0 40px;background:#05060f80;backdrop-filter:blur(30px) saturate(1.8);border-bottom:1px solid #ffffff14;font-family:-apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif;color:#fff}.ds-brand{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:700;letter-spacing:-.01em;color:#fff;text-decoration:none}.ds-ico{width:22px;height:22px;border-radius:6px;background:linear-gradient(160deg,#182057,#4b2f90)}.ds-nav nav{margin-left:auto;display:flex;align-items:center;gap:26px;font-size:14px}.ds-nav nav a{color:#ffffffb3;text-decoration:none;transition:color .15s}.ds-nav nav a:hover{color:#fff}.ds-lang{padding:3px 11px;border-radius:999px;box-shadow:inset 0 0 0 1px #ffffff2e;color:#fff!important}.ds-small{display:inline-flex;align-items:center;height:32px;padding:0 16px;border-radius:999px;background:#8f97ff;color:#0b0d2a;font-size:14px;font-weight:650;text-decoration:none}.ds-small:hover{background:#b0b5ff}"
+    },
+    {
+      "name": "Two-tone Heading",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "Section heading: the claim in full ink, then the quieter half. Shown on Paper.",
+      "html": "<h2 class=\"ds-two\"><span>Everything for one task, in one place.</span> <span class=\"ds-q\">Whichever app it lives in.</span></h2>",
+      "css": ".ds-two{margin:0;max-width:16em;padding:32px;background:#f4f4f7;color:#111114;font:750 48px/1.03 -apple-system, BlinkMacSystemFont, \"SF Pro Display\", system-ui, sans-serif;letter-spacing:-.04em}.ds-q{color:#8b8b95}"
+    },
+    {
+      "name": "Gradient Headline",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "Hero headline on Night with one gradient phrase (surface choice from the pinned reference).",
+      "html": "<h1 class=\"ds-hero\"><span>Tabs for</span><span><em>every</em> window.</span></h1>",
+      "css": ".ds-hero{margin:0;padding:40px;background:#05060f;color:#fff;text-align:center;font:800 72px/.98 -apple-system, BlinkMacSystemFont, \"SF Pro Display\", system-ui, sans-serif;letter-spacing:-.04em}.ds-hero span{display:block}.ds-hero em{font-style:normal;background:linear-gradient(92deg,#cdd0ff 0%,#8f97ff 36%,#c48cff 66%,#ff9f70 100%);-webkit-background-clip:text;background-clip:text;color:transparent}"
+    },
+    {
+      "name": "Bento Card",
+      "kind": "card",
+      "refersTo": "bento-card",
+      "description": "White card on Paper with full-bleed wallpaper art on top, title and body below.",
+      "html": "<div class=\"ds-bento\"><div class=\"ds-card\"><div class=\"ds-art\"><div class=\"ds-mini\"><i></i></div></div><h3>Any app, one strip.</h3><p>Browser, notes, terminal, chat: windows from different apps share one strip of tabs.</p></div></div>",
+      "css": ".ds-bento{padding:24px;background:#f4f4f7;font-family:-apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif}.ds-card{max-width:340px;padding:24px 26px 30px;border-radius:24px;background:#fff;color:#111114;box-shadow:0 0 0 1px #0000000d,0 1px 2px #0000000a}.ds-art{display:flex;justify-content:center;align-items:center;height:180px;margin:-24px -26px 24px;border-radius:24px 24px 0 0;overflow:hidden;background:radial-gradient(80% 70% at 90% 110%,#ff8f55aa,#ff8f5500 70%),linear-gradient(160deg,#182057,#2b2b88 55%,#4b2f90)}.ds-mini{width:180px;height:110px;border-radius:7px;background:#fff;box-shadow:0 0 0 .5px #00000040,0 10px 24px #0a0e3a66;overflow:hidden}.ds-mini i{display:block;height:16px;background:linear-gradient(#f1f1f4,#e6e6eb);border-bottom:1px solid #00000017}.ds-card h3{margin:0;font-size:22px;line-height:1.2;font-weight:700;letter-spacing:-.015em}.ds-card p{margin:8px 0 0;font-size:16px;line-height:1.55;color:#5f5f69}"
+    },
+    {
+      "name": "Shortcut Tile",
+      "kind": "chip",
+      "refersTo": "shortcut-tile",
+      "description": "Raised Night tile with dark keycaps above a label.",
+      "html": "<div class=\"ds-hands\"><div class=\"ds-tile\"><span class=\"ds-combo\"><kbd>⌥</kbd><kbd>1…8</kbd></span><span>Show that tab</span></div></div>",
+      "css": ".ds-hands{padding:24px;background:#05060f;font-family:-apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif}.ds-tile{display:flex;flex-direction:column;gap:14px;max-width:300px;padding:22px 24px;border-radius:18px;background:#0e1022;box-shadow:inset 0 0 0 1px #ffffff14;color:#b4b7d3;font-size:16px}.ds-combo{display:flex;gap:6px}.ds-combo kbd{height:34px;min-width:34px;padding:0 11px;display:inline-grid;place-items:center;border-radius:8px;background:linear-gradient(#272a3e,#1b1e2e);color:#fff;font:600 15px/1 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif;box-shadow:inset 0 1px 0 #ffffff1f,0 2px 0 #00000080}"
+    },
+    {
+      "name": "Stat",
+      "kind": "custom",
+      "refersTo": "stat",
+      "description": "Big Lit Periwinkle number with a Periwinkle unit and a Night Body caption.",
+      "html": "<dl class=\"ds-stat\"><dt>0.35<small>s</small></dt><dd>The pause that groups. Long enough to be sure, short enough not to wait.</dd></dl>",
+      "css": ".ds-stat{margin:0;padding:32px;background:#05060f;font-family:-apple-system, BlinkMacSystemFont, \"SF Pro Display\", system-ui, sans-serif}.ds-stat dt{font-size:88px;line-height:1;font-weight:750;letter-spacing:-.04em;color:#b0b5ff;font-variant-numeric:tabular-nums}.ds-stat small{margin-left:4px;font-size:.4em;letter-spacing:0;color:#8f97ff}.ds-stat dd{margin:14px 0 0;max-width:16em;font:400 16px/1.5 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif;color:#b4b7d3}"
+    },
+    {
+      "name": "Tab Strip",
+      "kind": "custom",
+      "refersTo": "tab-strip",
+      "description": "The app's own strip above its window, ⌥N hints on the right, inside the wallpaper.",
+      "html": "<div class=\"ds-wall\"><div class=\"ds-strip\"><button class=\"ds-tab\" aria-selected=\"true\"><svg class='ds-glyph' viewBox='0 0 16 16' aria-hidden='true'><circle cx='8' cy='8' r='6.25'/><path d='M10.6 5.4 9.1 9.1 5.4 10.6 6.9 6.9Z'/></svg><span>3 days in Lisbon</span><kbd>⌥1</kbd></button><button class=\"ds-tab\" aria-selected=\"false\"><svg class='ds-glyph' viewBox='0 0 16 16' aria-hidden='true'><rect x='3' y='1.75' width='10' height='12.5' rx='2'/><path d='M5.75 5.5h4.5M5.75 8h4.5M5.75 10.5h2.5'/></svg><span>Packing list</span><kbd>⌥2</kbd></button></div><div class=\"ds-win\"><div class=\"ds-bar\"><span class=\"ds-l\"><i></i><i></i><i></i></span>3 days in Lisbon</div></div></div>",
+      "css": ".ds-wall{padding:40px 32px;border-radius:28px;background:radial-gradient(140% 38% at 62% 112%,#ff9a5ef0 0%,#ff8f5599 34%,#ff8f5500 70%),linear-gradient(168deg,#182057,#2b2b88 48%,#4b2f90);font-family:-apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif}.ds-strip{display:flex;gap:3px;height:30px;padding:3px;margin-bottom:4px;border-radius:9px;background:#23262fee;backdrop-filter:blur(20px);box-shadow:0 0 0 .5px #ffffff26,0 -4px 18px #0a0e3a40}.ds-tab{position:relative;flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 30px 0 10px;border:0;border-radius:6px;background:transparent;color:#ffffffa3;font:600 12px/1 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif;white-space:nowrap;transition:background-color .15s,color .15s}.ds-tab span{overflow:hidden;text-overflow:ellipsis}.ds-tab kbd{position:absolute;right:9px;font:500 11px/1 -apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif;color:#ffffff66;font-variant-numeric:tabular-nums}.ds-tab:hover{background:#ffffff12}.ds-tab[aria-selected=true]{background:#ffffff29;color:#fff;box-shadow:inset 0 0 0 .5px #ffffff33}.ds-tab:focus-visible{outline:2px solid #7c85ff;outline-offset:1px}.ds-glyph{flex:none;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round}.ds-win{height:120px;border-radius:11px;overflow:hidden;background:#f7f7f9;box-shadow:0 0 0 .5px #0000004d,0 24px 56px #0a0e3a80,0 4px 14px #0a0e3a40}.ds-bar{position:relative;height:30px;display:flex;align-items:center;justify-content:center;background:linear-gradient(#f1f1f4,#e6e6eb);border-bottom:1px solid #00000017;color:#3c3d45;font-size:12.5px;font-weight:600}.ds-l{position:absolute;left:11px;display:flex;gap:7px}.ds-l i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.ds-l i:nth-child(2){background:#febc2e}.ds-l i:nth-child(3){background:#28c840}"
+    },
+    {
+      "name": "FAQ Disclosure",
+      "kind": "custom",
+      "refersTo": "faq",
+      "description": "Native details/summary on Paper with a drawn plus that turns to a cross.",
+      "html": "<div class=\"ds-faq\"><details open><summary>Which Macs does it run on?</summary><p>Macs with Apple silicon, on macOS 14 Sonoma or later.</p></details><details><summary>Safari and Finder already have tabs. Why this?</summary><p>Their tabs only hold their own windows. TabGroups stacks windows from any app under one strip.</p></details></div>",
+      "css": ".ds-faq{padding:8px 32px;background:#f4f4f7;color:#111114;font-family:-apple-system, BlinkMacSystemFont, \"SF Pro Text\", system-ui, sans-serif}.ds-faq details{border-bottom:1px solid #0000001a}.ds-faq summary{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;list-style:none;cursor:pointer;font-size:21px;font-weight:650;letter-spacing:-.01em}.ds-faq summary::-webkit-details-marker{display:none}.ds-faq summary::after{content:'';flex:none;width:14px;height:14px;background:linear-gradient(currentColor,currentColor) center/14px 1.75px no-repeat,linear-gradient(currentColor,currentColor) center/1.75px 14px no-repeat;transition:transform .3s cubic-bezier(.16,1,.3,1)}.ds-faq details[open] summary::after{transform:rotate(45deg)}.ds-faq summary:focus-visible{outline:2px solid #5561f2;outline-offset:3px;border-radius:6px}.ds-faq p{margin:0;padding-bottom:26px;font-size:17px;line-height:1.6;color:#5f5f69}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Desk Under Glass",
+    "overview": "**Creative North Star: \"The Desk Under Glass\"**\n\nThe page is a product page in black and paper; the Mac desktop is the exhibit inside it. Full-width bands alternate between Night and Paper, with no third background. The desktop world (indigo wallpaper with an apricot horizon, light macOS windows, the app's dark tab strip with ⌥N hints) appears only inside frames: the laptop screen in the scroll story, the art at the top of each bento card, and the try-it panel. The page around those frames is quiet: heavy system type, one periwinkle accent, and a single gradient phrase in the two biggest headlines.\n\nStructure and presentation follow trelliswm.app because the user pinned it as the reference. The order is a centred black hero, a sticky scroll story, a light feature bento, a black shortcuts-and-numbers band, light \"built\" points, a black try-it panel, a light FAQ, and a black closing call. The gradient headline word and the card bento are this surface's choices, adopted from that reference. They are not rules for other TabGroups surfaces.\n\nThe motion carries the product's gesture. In the story, scroll progress drives the desktop frame by frame, so scrolling back plays it in reverse. In the bento, three art loops replay group, switch and pull out. In the try-it panel the desktop is real and can be dragged. Every motion has a still, readable frame when reduced motion is on.",
+    "keyCharacteristics": [
+      "Two bands, Night and Paper, strictly alternating from the features section down.",
+      "The desktop lives inside frames: laptop screen, bento art, try panel.",
+      "One page accent (periwinkle) for actions, live progress and numbers; indigo stays inside the desktop.",
+      "One system family, set heavy (750–800) and tight (-0.04em) for headlines.",
+      "The app's own strip, windows and drop highlight are reproduced faithfully at real macOS sizes."
+    ],
+    "rules": [
+      {
+        "name": "The Two Bands Rule",
+        "body": "A section is Night or Paper, nothing else. Raised Night is the only tonal step, and the wallpaper is never a band.",
+        "section": "colors"
+      },
+      {
+        "name": "The Desktop Inside Rule",
+        "body": "The wallpaper, light windows, the strip and indigo appear only inside a frame: the laptop screen, the art at the top of a bento card, or the try panel. The page never imitates a desktop around them.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Accent Rule",
+        "body": "Periwinkle is the page's only accent. Indigo belongs to the desktop, and apricot and sky are light in the wallpaper, never ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Gradient Phrase Rule",
+        "body": "In this surface, a big headline (hero, closing call) may mark one phrase, written `*like this*` in content, for the Headline Gradient. Section headings never take it; they use two tones. This came from the pinned reference and is not a house rule.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two-Tone Rule",
+        "body": "A section heading states the claim in full ink, followed by a quieter half in Paper Quiet or Night Quiet. It is one heading element, not a heading plus a subtitle.",
+        "section": "typography"
+      },
+      {
+        "name": "The Real Chrome Rule",
+        "body": "Anything that imitates macOS chrome inside a frame (title bars, tabs, menu bar, address field) uses macOS sizes: 11–13px, weight 500–600, no negative tracking. Miniatures shrink with their scale and never grow.",
+        "section": "typography"
+      },
+      {
+        "name": "The CJK Tracking Rule",
+        "body": "Under `:lang(zh)`, h1–h3 drop to -0.01em and set `word-break: keep-all; overflow-wrap: anywhere`, so they break at punctuation rather than mid-phrase.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Paper Rule",
+        "body": "On Paper nothing lifts: cards are white on a hairline ring, and points are separated by a top rule. Lifted shadows belong to windows and the laptop.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Night Shadow Rule",
+        "body": "Inside the desktop, every soft shadow is tinted #0a0e3a so windows belong to the wallpaper. Pure black appears only in hairline outlines and on the laptop, which sits on the page rather than in the desktop.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do alternate Night and Paper bands; use Raised Night only for tiles on Night.",
+      "Do keep the desktop (wallpaper, windows, strip, indigo) inside a frame: the laptop screen, the bento art, the try panel.",
+      "Do keep the strip attached to its window: the 34px band above it, the same width, ⌥N hints on the right.",
+      "Do set big headings in the system face at 750–800 with -0.04em tracking, and split section headings into a full-ink claim and a quieter half.",
+      "Do use Periwinkle for the page's actions, live progress and numbers, and Signal Indigo for focus on Paper.",
+      "Do tint soft shadows inside the desktop with #0a0e3a.",
+      "Do give every looping, gliding or scroll-driven motion a still, readable reduced-motion state."
+    ],
+    "donts": [
+      "Don't paint a band in the wallpaper or a third background tone.",
+      "Don't put the Headline Gradient on more than one phrase per headline, or on section headings, body copy or controls.",
+      "Don't use indigo, apricot or sky on the page outside the frames.",
+      "Don't lift cards on Paper with a drop shadow; use the Card ring.",
+      "Don't use the strip's graphite for anything but the strip.",
+      "Don't set window chrome larger than 13px or track it negatively."
+    ]
+  }
+}

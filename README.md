@@ -49,6 +49,10 @@ By default TabGroups has no Dock icon and no menu-bar item. Open it again to bri
 
 "Parking" moves a window so that a single pixel stays on screen, in a corner with no neighbouring display. Unlike minimising or hiding, it has no animation, leaves the app's other windows alone, and the window stays live.
 
+## Website
+
+The landing page lives in `site/` (Next.js, static export): `cd site && pnpm install && pnpm build` writes `site/out/`, which any static host can serve. It reads the latest version from `appcast.xml`, so rebuild it after each release.
+
 ## Known limitations
 
 - Parked windows still show up in Mission Control, and on leaving it you can see them fly back to the corner.

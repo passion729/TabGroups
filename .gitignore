@@ -2,3 +2,7 @@
 build/
 .swiftpm/
 .DS_Store
+.impeccable/review/
+.impeccable/questions/
+.impeccable/direction.json
+.impeccable/directions.html
