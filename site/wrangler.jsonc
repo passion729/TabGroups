@@ -3,6 +3,8 @@
 {
   "name": "tabgroups",
   "compatibility_date": "2026-10-19",
+  "workers_dev": false,
+  "routes": [{ "pattern": "tabgroups.passion7.cc", "custom_domain": true }],
   "assets": {
     "directory": "./out",
     "not_found_handling": "404-page"
