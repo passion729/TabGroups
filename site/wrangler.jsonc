@@ -1,0 +1,10 @@
+// Cloudflare (Pages, now Workers static assets): uploads the static export in out/.
+// Deploy: pnpm build && npx wrangler deploy
+{
+  "name": "tabgroups",
+  "compatibility_date": "2026-10-19",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
