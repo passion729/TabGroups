@@ -881,7 +881,7 @@ h2 em {
 .cta h2 {
   margin-top: 28px;
   font-family: var(--display);
-  font-size: clamp(44px, 7vw, 100px);
+  font-size: clamp(34px, 9.2vw, 100px);
   line-height: 1.02;
   letter-spacing: -0.04em;
   font-weight: 800;
@@ -2075,6 +2075,19 @@ h2 em {
   .points {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* One column: the wide card must not keep spanning two (it would add an implicit, squeezed column). */
+  .bento li.wide {
+    grid-column: auto;
+  }
+  /* Let the laptop run past the screen edges so its desktop stays legible. */
+  .story {
+    overflow-x: clip;
+  }
+  .laptop {
+    width: 118%;
+    max-width: none;
+    margin: 0 -9%;
+  }
   .bento li {
     padding: 24px 22px 26px;
   }
@@ -2082,8 +2095,11 @@ h2 em {
   .bento li.wide .art {
     margin: -24px -22px 22px;
   }
+  /* Shrink the 360 × 240 scene to fit; transform, not zoom, so it paints cleanly. */
   .bento .ill {
-    zoom: 0.86;
+    transform: scale(0.86);
+    transform-origin: top center;
+    margin-bottom: -34px;
   }
   .stats {
     gap: 28px 20px;
