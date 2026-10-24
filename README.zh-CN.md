@@ -42,3 +42,7 @@ chmod +x make-app.sh && ./make-app.sh && open build/TabGroups.app
 - 还没有持久化，重启后组不会恢复。以后可以按 bundleID 加窗口标题保存，下次启动时再匹配回来。
 - 对全屏窗口、原生标签窗口（Finder / Safari 的 `AXTabGroup`）、对话框和 sheet 没有专门处理。
 - `order(.above, relativeTo:)` 用的是其他 app 的窗口编号。如果遇到某个 app 的标签栏被它的窗口盖住，可以在 `windowFocused` 里加一次延迟后再重新排一次层级。
+
+## 开源协议
+
+[MIT](LICENSE)。例外：`site/public/macbook-pro.webp` 是 Apple 的 MacBook Pro 产品样机图，按 Apple Design Resources 许可使用，不在 MIT 协议范围内，不能单独再分发。

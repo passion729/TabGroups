@@ -83,7 +83,7 @@ const en = {
       { title: "Written in Swift.", body: "A native Mac app on AppKit and the Accessibility API. Small and fast, with no web view inside." },
       { title: "Out of sight.", body: "No menu-bar icon, and no Dock icon unless you want one. Open it again for its one settings window." },
       { title: "One permission.", body: "Accessibility, to move other apps’ windows. It records nothing. Its only trip online is a daily update check." },
-      { title: "Free and open source.", body: "Every line is on GitHub. New versions download and install by themselves." },
+      { title: "Free and open source.", body: "Every line is on GitHub under the MIT license. New versions download and install by themselves." },
     ],
   },
   try: {
@@ -147,7 +147,7 @@ const en = {
         q: "What happens when I quit?",
         a: "Every group comes apart and every window goes back on the desktop. Your groups are saved, and they’re put back together the next time TabGroups starts.",
       },
-      { q: "Is it really free?", a: "Yes. It’s open source on GitHub, with no account, no trial and no paid tier." },
+      { q: "Is it really free?", a: "Yes. It’s open source under the MIT license, with no account, no trial and no paid tier." },
     ],
   },
   cta: {
@@ -159,6 +159,7 @@ const en = {
     note: "TabGroups requires a Mac with Apple silicon and macOS 14 Sonoma or later. The desktop on this page is a browser simulation.",
     credit: "Inspired by Tab groups in {trellis}.",
     contact: "Contact",
+    license: "MIT License",
     released: "Version {version}, released {date}.",
   },
 };
@@ -246,7 +247,7 @@ const zh: Content = {
       { title: "用 Swift 写成。", body: "原生 Mac app，基于 AppKit 和辅助功能接口。体积小，反应快，里面没有网页。" },
       { title: "平时看不见。", body: "菜单栏没有图标，Dock 里也没有（除非你想要）。再打开一次 app，就能看到它唯一的设置窗口。" },
       { title: "只要一项权限。", body: "用「辅助功能」移动其他 app 的窗口。它不记录任何内容，唯一的联网是每天检查一次更新。" },
-      { title: "免费，开源。", body: "每一行代码都在 GitHub 上。新版本会自己下载安装。" },
+      { title: "免费，开源。", body: "每一行代码都以 MIT 协议放在 GitHub 上。新版本会自己下载安装。" },
     ],
   },
   try: {
@@ -310,7 +311,7 @@ const zh: Content = {
         q: "退出以后会怎样？",
         a: "所有组都会拆开，每个窗口都回到桌面上。你的组会被记住，下次启动 TabGroups 时自动重新组好。",
       },
-      { q: "真的免费吗？", a: "真的。代码开源在 GitHub 上，不用注册账号，没有试用期，也没有付费版。" },
+      { q: "真的免费吗？", a: "真的。代码以 MIT 协议开源在 GitHub 上，不用注册账号，没有试用期，也没有付费版。" },
     ],
   },
   cta: {
@@ -322,6 +323,7 @@ const zh: Content = {
     note: "TabGroups 需要搭载 Apple 芯片、运行 macOS 14 Sonoma 或更新版本的 Mac。本页的桌面是在浏览器里模拟的。",
     credit: "灵感来自 {trellis} 的 Tab groups。",
     contact: "联系我",
+    license: "MIT 协议",
     released: "版本 {version}，{date} 发布。",
   },
 };

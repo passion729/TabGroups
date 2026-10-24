@@ -42,7 +42,7 @@ Tabs across apps, not inside one app: a browser tab, a Notes window and a termin
 ## Brand Commitments
 
 - Name: TabGroups.
-- Free and open source; source at https://github.com/passion729/TabGroups. No license file yet: do not name a license.
+- Free and open source under the MIT license (`LICENSE`); source at https://github.com/passion729/TabGroups.
 - Credit: inspired by the Tab groups feature of TrellisWM (https://trelliswm.app).
 - State Apple Silicon / macOS 14+ plainly.
 - English and Simplified Chinese, switchable.

@@ -198,6 +198,7 @@ export default function Landing({ c }: { c: Content }) {
             <a href={`mailto:${EMAIL}`} title={EMAIL}>
               {c.footer.contact}
             </a>
+            <a href={`${GITHUB}/blob/main/LICENSE`}>{c.footer.license}</a>
           </nav>
           <p>{c.footer.note}</p>
           <p>

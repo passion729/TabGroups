@@ -62,3 +62,7 @@ The landing page lives in `site/` (Next.js, static export): `cd site && pnpm ins
 - Groups aren't saved; they're gone after a restart.
 - Windows with native tabs, full-screen windows and sheets get no special handling.
 - Dragging a window out of an edge tile can't drop it onto another group (its size changes during that drag).
+
+## License
+
+[MIT](LICENSE). Not covered: `site/public/macbook-pro.webp` is Apple's MacBook Pro product bezel, used under the Apple Design Resources license; it may not be redistributed on its own.
