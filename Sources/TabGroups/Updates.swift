@@ -22,6 +22,20 @@ final class Updates: NSObject, SPUStandardUserDriverDelegate {
                                                   userDriverDelegate: self)
     }
 
+    /// Daily checks; off leaves only "Check for Updates…". Both switches
+    /// default to on (`SUEnableAutomaticChecks`, `SUAutomaticallyUpdate` in
+    /// Info.plist) and Sparkle keeps the user's choice.
+    var autoCheck: Bool {
+        get { controller?.updater.automaticallyChecksForUpdates ?? false }
+        set { controller?.updater.automaticallyChecksForUpdates = newValue }
+    }
+
+    /// Install what a scheduled check finds; off: Sparkle asks first.
+    var autoInstall: Bool {
+        get { controller?.updater.automaticallyDownloadsUpdates ?? false }
+        set { controller?.updater.automaticallyDownloadsUpdates = newValue }
+    }
+
     func check() {
         NSApp.activate(ignoringOtherApps: true)
         controller?.checkForUpdates(nil)

@@ -16,6 +16,8 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
 
     private let loginBox = NSButton(checkboxWithTitle: "Launch at login", target: nil, action: nil)
     private let dockBox = NSButton(checkboxWithTitle: "Show in Dock", target: nil, action: nil)
+    private let checkBox = NSButton(checkboxWithTitle: "Check for updates automatically", target: nil, action: nil)
+    private let installBox = NSButton(checkboxWithTitle: "Install updates automatically", target: nil, action: nil)
     private let keyPopup = NSPopUpButton()
     private let switchPopup = NSPopUpButton()
     private let axStatus = NSTextField(labelWithString: "")
@@ -31,6 +33,10 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
         loginBox.state = LoginItem.isEnabled ? .on : .off
         loginBox.isEnabled = LoginItem.isAvailable
         dockBox.state = Self.showInDock ? .on : .off
+        checkBox.state = Updates.shared.autoCheck ? .on : .off
+        installBox.state = Updates.shared.autoInstall ? .on : .off
+        checkBox.isEnabled = LoginItem.isAvailable   // Sparkle runs in the app bundle only
+        installBox.isEnabled = checkBox.isEnabled && checkBox.state == .on
         keyPopup.selectItem(at: DragKey.allCases.firstIndex(of: DragKey.current) ?? 0)
         switchPopup.selectItem(at: SwitchKey.allCases.firstIndex(of: SwitchKey.current) ?? 0)
         let trusted = AXIsProcessTrusted()
@@ -62,6 +68,13 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
 
     @objc private func checkForUpdates() { Updates.shared.check() }
 
+    @objc private func toggleCheck() {
+        Updates.shared.autoCheck = checkBox.state == .on
+        refresh()
+    }
+
+    @objc private func toggleInstall() { Updates.shared.autoInstall = installBox.state == .on }
+
     @objc private func pickKey() {
         DragKey.current = DragKey.allCases[keyPopup.indexOfSelectedItem]
     }
@@ -79,6 +92,10 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
         loginBox.action = #selector(toggleLogin)
         dockBox.target = self
         dockBox.action = #selector(toggleDock)
+        checkBox.target = self
+        checkBox.action = #selector(toggleCheck)
+        installBox.target = self
+        installBox.action = #selector(toggleInstall)
 
         keyPopup.addItems(withTitles: DragKey.allCases.map(\.title))
         keyPopup.target = self
@@ -103,7 +120,7 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
         let version = NSTextField(labelWithString: "Version \(Updates.current)")
         version.textColor = .secondaryLabelColor
         let updateRow = NSStackView(views: [updates, version])
-        let rows: [NSView] = [hint, axRow, keyRow, switchRow, loginBox, dockBox, updateRow, quit]
+        let rows: [NSView] = [hint, axRow, keyRow, switchRow, loginBox, dockBox, checkBox, installBox, updateRow, quit]
 
         let stack = NSStackView(views: rows)
         stack.orientation = .vertical
