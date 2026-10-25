@@ -40,11 +40,12 @@ final class Win {
         AX.withoutEnhancedUI(appElement) { AX.setFrame(element, r) }
     }
 
-    /// Bring this window (and its app) to the front.
+    /// Bring this window (and its app) to the front, with keyboard focus.
     func raise() {
+        let focused = Focus.focus(id, pid: pid)
         AX.set(element, kAXMainAttribute, kCFBooleanTrue)
         AX.perform(element, kAXRaiseAction)
-        AX.set(appElement, kAXFrontmostAttribute, kCFBooleanTrue)
+        if !focused { AX.set(appElement, kAXFrontmostAttribute, kCFBooleanTrue) }
     }
 
     func close() {

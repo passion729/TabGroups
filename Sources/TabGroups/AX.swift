@@ -6,6 +6,44 @@ import ApplicationServices
 @discardableResult
 func _AXUIElementGetWindow(_ element: AXUIElement, _ wid: inout CGWindowID) -> AXError
 
+/// `GetProcessForPID` without its deprecation warning.
+@_silgen_name("GetProcessForPID")
+func _GetProcessForPID(_ pid: pid_t, _ psn: UnsafeMutablePointer<ProcessSerialNumber>) -> OSStatus
+
+/// Make a window the key window of its app, and that app frontmost: what a
+/// click in the window does. AX alone can't do it: `kAXMainAttribute` +
+/// `kAXFrontmostAttribute` raise the window, but the app gives keyboard focus
+/// back to the window it had key before (the previous tab). The SkyLight
+/// calls are the ones yabai and AltTab use.
+@MainActor
+enum Focus {
+    private typealias SetFront = @convention(c) (UnsafeMutablePointer<ProcessSerialNumber>, CGWindowID, UInt32) -> CGError
+    private typealias PostEvent = @convention(c) (UnsafeMutablePointer<ProcessSerialNumber>, UnsafeMutablePointer<UInt8>) -> CGError
+
+    private static let skyLight = dlopen("/System/Library/PrivateFrameworks/SkyLight.framework/SkyLight", RTLD_LAZY)
+    private static let setFront = dlsym(skyLight, "_SLPSSetFrontProcessWithOptions").map { unsafeBitCast($0, to: SetFront.self) }
+    private static let postEvent = dlsym(skyLight, "SLPSPostEventRecordTo").map { unsafeBitCast($0, to: PostEvent.self) }
+
+    /// False when SkyLight isn't there (the caller falls back to AX).
+    static func focus(_ wid: CGWindowID, pid: pid_t) -> Bool {
+        guard let setFront, let postEvent else { return false }
+        var psn = ProcessSerialNumber()
+        guard _GetProcessForPID(pid, &psn) == noErr else { return false }
+        _ = setFront(&psn, wid, 0x200)   // kCPSUserGenerated
+        // A synthetic "window became key" event record.
+        var bytes = [UInt8](repeating: 0, count: 0xf8)
+        bytes[0x04] = 0xf8
+        bytes[0x3a] = 0x10
+        withUnsafeBytes(of: wid) { bytes.replaceSubrange(0x3c..<0x40, with: $0) }
+        for i in 0x20..<0x30 { bytes[i] = 0xff }
+        bytes[0x08] = 0x01
+        _ = postEvent(&psn, &bytes)
+        bytes[0x08] = 0x02
+        _ = postEvent(&psn, &bytes)
+        return true
+    }
+}
+
 /// Thin helpers over the Accessibility C API.
 @MainActor
 enum AX {
