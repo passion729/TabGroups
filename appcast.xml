@@ -3,6 +3,15 @@
     <channel>
         <title>TabGroups</title>
         <item>
+            <title>0.7</title>
+            <pubDate>Sun, 25 Oct 2026 16:41:37 +0800</pubDate>
+            <sparkle:version>7</sparkle:version>
+            <sparkle:shortVersionString>0.7</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.7/TabGroups-0.7.zip" length="2685208" type="application/octet-stream" sparkle:edSignature="6+wRzdZnyDjcrHXy2kniTq0XmtOuY19CtX6U+eeo00LxyAF+n91i+9XI7oLV/1Lc+oA+KKMSYo1nqYCvmPGeDQ=="/>
+        </item>
+        <item>
             <title>0.6</title>
             <pubDate>Fri, 23 Oct 2026 15:32:08 +0800</pubDate>
             <sparkle:version>6</sparkle:version>
@@ -19,15 +28,6 @@
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
             <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.5/TabGroups-0.5.zip" length="2681612" type="application/octet-stream" sparkle:edSignature="tmdsoy0dLs07YajtEBcr+SF+rUGUhvVV0jYm1y7cnnYgWs91HEH0vL5QziIq+NzXHa91mHPXHRUSHBzrw8FgAA=="/>
-        </item>
-        <item>
-            <title>0.4</title>
-            <pubDate>Thu, 22 Oct 2026 22:29:51 +0800</pubDate>
-            <sparkle:version>4</sparkle:version>
-            <sparkle:shortVersionString>0.4</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
-            <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.4/TabGroups-0.4.zip" length="2678410" type="application/octet-stream" sparkle:edSignature="WFYxYNZtiAnK7AZVxkXS5WyavXdVju9rp+U023UFXxXSr17vaRmF3EPskB1HDaVMWb6tuLBB3ECb5f/zSETgDw=="/>
         </item>
     </channel>
 </rss>
