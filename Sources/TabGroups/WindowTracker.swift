@@ -9,7 +9,10 @@ final class Win {
     let element: AXUIElement
     let appElement: AXUIElement
     let appName: String
+    let bundleID: String?
     let icon: NSImage?
+    /// Last title read: a dead window (its app quit) has none to give.
+    private var lastTitle = ""
 
     init(id: CGWindowID, pid: pid_t, element: AXUIElement, appElement: AXUIElement) {
         self.id = id
@@ -18,12 +21,13 @@ final class Win {
         self.appElement = appElement
         let app = NSRunningApplication(processIdentifier: pid)
         appName = app?.localizedName ?? "App"
+        bundleID = app?.bundleIdentifier
         icon = app?.icon
     }
 
     var title: String {
-        let t = AX.string(element, kAXTitleAttribute) ?? ""
-        return t.isEmpty ? appName : t
+        if let t = AX.string(element, kAXTitleAttribute) { lastTitle = t }
+        return lastTitle.isEmpty ? appName : lastTitle
     }
 
     var frame: CGRect? { AX.frame(element) }
@@ -59,7 +63,9 @@ final class Win {
 protocol WindowTrackerDelegate: AnyObject {
     func windowMoved(_ w: Win)
     func windowResized(_ w: Win)
-    func windowDestroyed(_ id: CGWindowID)
+    /// Already out of `windows`.
+    func windowDestroyed(_ w: Win)
+    func windowAppeared(_ w: Win)
     func windowTitleChanged(_ w: Win)
     func windowFocused(_ w: Win)
     func windowMinimized(_ w: Win)
@@ -158,7 +164,7 @@ final class WindowTracker {
         appElements[pid] = nil
         for (id, w) in windows where w.pid == pid {
             windows[id] = nil
-            delegate?.windowDestroyed(id)
+            delegate?.windowDestroyed(w)
         }
     }
 
@@ -184,6 +190,7 @@ final class WindowTracker {
                 AXObserverAddNotification(observer, el, n as CFString, refcon)
             }
         }
+        delegate?.windowAppeared(w)
         return w
     }
 
@@ -212,7 +219,7 @@ final class WindowTracker {
             // The element is already dead, so match it by identity.
             if let entry = windows.first(where: { CFEqual($0.value.element, el) }) {
                 windows[entry.key] = nil
-                delegate?.windowDestroyed(entry.key)
+                delegate?.windowDestroyed(entry.value)
             }
 
         case kAXMovedNotification:

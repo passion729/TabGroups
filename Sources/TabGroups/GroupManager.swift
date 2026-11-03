@@ -236,6 +236,55 @@ final class GroupManager {
         front?.activate()
     }
 
+    // MARK: Apps that restart
+
+    /// A tab that went away (an app update relaunches it, a crash, ⌘Q). If
+    /// its app comes back soon, as another process, its new window takes the
+    /// old one's place; the same process opening a window again doesn't
+    /// count (⌘W, then ⌘N).
+    private struct Lost {
+        var id: CGWindowID
+        var pid: pid_t
+        var bundleID: String
+        var title: String
+        var partners: [CGWindowID]
+        var until: Date
+    }
+    private var lost: [Lost] = []
+    /// Lost windows that came back, old ID → new: a partner may be one.
+    private var returned: [CGWindowID: CGWindowID] = [:]
+
+    private func remember(_ w: Win) {
+        lost.removeAll { $0.until < Date() }
+        if lost.isEmpty { returned.removeAll() }
+        guard let bundleID = w.bundleID, !lost.contains(where: { $0.id == w.id }) else { return }
+        let partners: [CGWindowID]
+        if let g = group(of: w.id) {
+            partners = g.tabs.filter { $0 != w.id }
+        } else if let other = lost.first(where: { $0.partners.contains(w.id) }) {
+            // Its group ended when a tab of the same app went first.
+            partners = [other.id] + other.partners.filter { $0 != w.id }
+        } else { return }
+        // Long enough for an updater to install and relaunch.
+        lost.append(Lost(id: w.id, pid: w.pid, bundleID: bundleID, title: w.title,
+                         partners: partners, until: Date().addingTimeInterval(120)))
+    }
+
+    private func bringBack(_ w: Win) {
+        guard tracker.windows[w.id] === w, group(of: w.id) == nil else { return }
+        let title = w.title
+        let mine = lost.indices.filter { lost[$0].bundleID == w.bundleID && lost[$0].pid != w.pid }
+        guard let i = mine.first(where: { lost[$0].title == title }) ?? mine.first else { return }
+        let l = lost.remove(at: i)
+        returned[l.id] = w.id
+        let partners = l.partners.compactMap { tracker.windows[returned[$0] ?? $0] }.filter { $0.id != w.id }
+        guard let target = partners.first(where: { group(of: $0.id) != nil }) ?? partners.first else { return }
+        // Showing the tab activates its app; an update may relaunch it behind.
+        let front = NSWorkspace.shared.frontmostApplication
+        join(w, onto: target)
+        if let front, front.processIdentifier != w.pid { front.activate() }
+    }
+
     // MARK: Placement
 
     private func place(_ w: Win, _ r: CGRect) {
@@ -413,9 +462,19 @@ extension GroupManager: WindowTrackerDelegate {
     func windowMoved(_ w: Win) { follow(w) }
     func windowResized(_ w: Win) { follow(w) }
 
-    func windowDestroyed(_ id: CGWindowID) {
-        sizeBeforeGrouping[id] = nil
-        if let g = group(of: id) { remove(id, from: g) }
+    func windowDestroyed(_ w: Win) {
+        remember(w)
+        sizeBeforeGrouping[w.id] = nil
+        if let g = group(of: w.id) { remove(w.id, from: g) }
+    }
+
+    func windowAppeared(_ w: Win) {
+        guard lost.contains(where: { $0.bundleID == w.bundleID && $0.pid != w.pid }) else { return }
+        // A relaunched app puts its windows where it left them just after
+        // creating them: let it, or the group would follow that move.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            MainActor.assumeIsolated { self?.bringBack(w) }
+        }
     }
 
     func windowTitleChanged(_ w: Win) {
@@ -452,6 +511,7 @@ extension GroupManager: WindowTrackerDelegate {
                               let w = self.tracker.windows[id],
                               NSRunningApplication(processIdentifier: w.pid)?.isHidden == false,
                               AX.bool(w.element, kAXMinimizedAttribute) != true else { continue }
+                        self.remember(w)
                         self.remove(id, from: g)
                     }
                 }
