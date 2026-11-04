@@ -247,7 +247,8 @@ final class GroupManager {
         var pid: pid_t
         var bundleID: String
         var title: String
-        var partners: [CGWindowID]
+        /// Its group's tabs in order, itself included.
+        var order: [CGWindowID]
         var until: Date
     }
     private var lost: [Lost] = []
@@ -258,16 +259,16 @@ final class GroupManager {
         lost.removeAll { $0.until < Date() }
         if lost.isEmpty { returned.removeAll() }
         guard let bundleID = w.bundleID, !lost.contains(where: { $0.id == w.id }) else { return }
-        let partners: [CGWindowID]
+        let order: [CGWindowID]
         if let g = group(of: w.id) {
-            partners = g.tabs.filter { $0 != w.id }
-        } else if let other = lost.first(where: { $0.partners.contains(w.id) }) {
+            order = g.tabs
+        } else if let other = lost.first(where: { $0.order.contains(w.id) }) {
             // Its group ended when a tab of the same app went first.
-            partners = [other.id] + other.partners.filter { $0 != w.id }
+            order = other.order
         } else { return }
         // Long enough for an updater to install and relaunch.
         lost.append(Lost(id: w.id, pid: w.pid, bundleID: bundleID, title: w.title,
-                         partners: partners, until: Date().addingTimeInterval(120)))
+                         order: order, until: Date().addingTimeInterval(120)))
     }
 
     private func bringBack(_ w: Win) {
@@ -277,11 +278,22 @@ final class GroupManager {
         guard let i = mine.first(where: { lost[$0].title == title }) ?? mine.first else { return }
         let l = lost.remove(at: i)
         returned[l.id] = w.id
-        let partners = l.partners.compactMap { tracker.windows[returned[$0] ?? $0] }.filter { $0.id != w.id }
+        let order = l.order.map { returned[$0] ?? $0 }
+        let partners = order.compactMap { tracker.windows[$0] }.filter { $0.id != w.id }
         guard let target = partners.first(where: { group(of: $0.id) != nil }) ?? partners.first else { return }
         // Showing the tab activates its app; an update may relaunch it behind.
         let front = NSWorkspace.shared.frontmostApplication
         join(w, onto: target)
+        // Back to its old place: after the nearest tab that was before it,
+        // else before the nearest one that was after it.
+        if let g = group(of: w.id), let k = order.firstIndex(of: w.id) {
+            g.tabs.removeAll { $0 == w.id }
+            let at = order[..<k].reversed().lazy.compactMap { g.tabs.firstIndex(of: $0) }.first.map { $0 + 1 }
+                ?? order[(k + 1)...].lazy.compactMap { g.tabs.firstIndex(of: $0) }.first
+                ?? g.tabs.count
+            g.tabs.insert(w.id, at: at)
+            refreshTabs(g)
+        }
         if let front, front.processIdentifier != w.pid { front.activate() }
     }
 
