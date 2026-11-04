@@ -11,7 +11,7 @@ final class SettingsWindow: NSObject, NSWindowDelegate {
     }
 
     static func applyDockPolicy() {
-        NSApp.setActivationPolicy(showInDock ? .regular : .accessory)
+        NSApp.setActivationPolicy(showInDock || Updates.shared.pending ? .regular : .accessory)
     }
 
     private let loginBox = NSButton(checkboxWithTitle: "Launch at login", target: nil, action: nil)

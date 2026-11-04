@@ -63,9 +63,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    /// Opened again from Finder, Spotlight or the Dock.
+    /// Opened again from Finder, Spotlight or the Dock (or its update badge).
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        settings.show()
+        if Updates.shared.pending { Updates.shared.check() } else { settings.show() }
         return false
     }
 
