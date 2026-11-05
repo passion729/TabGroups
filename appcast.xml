@@ -3,6 +3,15 @@
     <channel>
         <title>TabGroups</title>
         <item>
+            <title>0.11</title>
+            <pubDate>Thu, 05 Nov 2026 20:22:54 +0800</pubDate>
+            <sparkle:version>11</sparkle:version>
+            <sparkle:shortVersionString>0.11</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.11/TabGroups-0.11.zip" length="2700557" type="application/octet-stream" sparkle:edSignature="QrpdT4LLDa1zbQQiFRNKW7YMUYrcp7LPeLZrH5dAq5DjPWxO7YSXg7erBhXu/cVpUs6NgYBWvU0huBPd3ErkCA=="/>
+        </item>
+        <item>
             <title>0.10</title>
             <pubDate>Thu, 05 Nov 2026 00:58:34 +0800</pubDate>
             <sparkle:version>10</sparkle:version>
@@ -19,15 +28,6 @@
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
             <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.9/TabGroups-0.9.zip" length="2692522" type="application/octet-stream" sparkle:edSignature="qQeNxXKH+fRMhKH27yVM9R32q/y+oYMXhu2LEZ8fGjqs2DECx3NZhWNx3yP5R/AVtpn1L1NggVJWGv+6xlFYCw=="/>
-        </item>
-        <item>
-            <title>0.8</title>
-            <pubDate>Tue, 03 Nov 2026 14:20:36 +0800</pubDate>
-            <sparkle:version>8</sparkle:version>
-            <sparkle:shortVersionString>0.8</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
-            <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.8/TabGroups-0.8.zip" length="2690580" type="application/octet-stream" sparkle:edSignature="Q4kZgJEO5H7yAsfTzSxrtKFv/b0EsJIF67AmX/h3cytZXESbPm9GyuK2WumV7z2a5UKIXNjSjoU3JHAaNzrjDw=="/>
         </item>
     </channel>
 </rss>
