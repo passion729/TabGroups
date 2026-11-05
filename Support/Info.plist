@@ -32,5 +32,7 @@
 	<string>https://raw.githubusercontent.com/passion729/TabGroups/main/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>+asJpmAi3ltEyDfSYkyUpMcT6eskNN6zw9U643V8aac=</string>
+	<key>SUScheduledCheckInterval</key>
+	<integer>21600</integer>
 </dict>
 </plist>

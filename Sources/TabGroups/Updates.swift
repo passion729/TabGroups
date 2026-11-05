@@ -1,7 +1,7 @@
 import AppKit
 import Sparkle
 
-/// Sparkle: checks `SUFeedURL` (appcast.xml in the repo) once a day and
+/// Sparkle: checks `SUFeedURL` (appcast.xml in the repo) every 6 hours and
 /// downloads updates by itself. Each release is signed with the EdDSA key
 /// kept in Infisical; see release.sh. A background app rarely quits (when
 /// Sparkle would install) and its alerts go unseen, so a found update puts
@@ -24,7 +24,7 @@ final class Updates: NSObject, SPUUpdaterDelegate, SPUStandardUserDriverDelegate
                                                   userDriverDelegate: self)
     }
 
-    /// Daily checks; off leaves only "Check for Updates…". Both switches
+    /// Checks every 6 hours (`SUScheduledCheckInterval`); off leaves only "Check for Updates…". Both switches
     /// default to on (`SUEnableAutomaticChecks`, `SUAutomaticallyUpdate` in
     /// Info.plist) and Sparkle keeps the user's choice.
     var autoCheck: Bool {
