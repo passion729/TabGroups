@@ -96,6 +96,11 @@ final class TabStripView: NSView {
     private var torn = false
     private let chip = TabChip()
     private let tearDistance: CGFloat = 24
+    /// How far each tab is drawn from its slot: the pressed tab follows the
+    /// pointer, the others slide into their new slots; eased to 0 by `tick`.
+    private var slide: [CGWindowID: CGFloat] = [:]
+    private var grabX: CGFloat = 0   // pointer x within the pressed tab
+    private var link: CADisplayLink?
 
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
 
@@ -114,6 +119,10 @@ final class TabStripView: NSView {
         let n = CGFloat(max(items.count, 1))
         let w = (bounds.width - inset * 2 - gap * (n - 1)) / n
         return NSRect(x: inset + CGFloat(i) * (w + gap), y: (bounds.height - height) / 2, width: w, height: height)
+    }
+
+    private func shownRect(_ i: Int) -> NSRect {
+        tabRect(i).offsetBy(dx: slide[items[i].id] ?? 0, dy: 0)
     }
 
     private func closeRect(_ i: Int) -> NSRect {
@@ -145,13 +154,16 @@ final class TabStripView: NSView {
         NSColor.white.withAlphaComponent(0.14).setFill()
         for i in items.indices.dropFirst() {
             let filled = { (j: Int) in self.items[j].id == self.active || (self.hovered == j && !self.dragging) }
-            if filled(i - 1) || filled(i) { continue }
+            if filled(i - 1) || filled(i) || dragging || !slide.isEmpty { continue }
             let r = tabRect(i)
             NSRect(x: r.minX - 2.5, y: r.midY - 8, width: 1, height: 16).fill()
         }
 
-        for (i, item) in items.enumerated() {
-            let r = tabRect(i)
+        // The pressed tab last, so it slides over the others.
+        let order = items.indices.filter { items[$0].id != pressedID } + items.indices.filter { items[$0].id == pressedID }
+        for i in order {
+            let item = items[i]
+            let r = shownRect(i)
             let isActive = item.id == active
             let isPressed = dragging && item.id == pressedID
             let shape = NSBezierPath(roundedRect: r, xRadius: 7, yRadius: 7)
@@ -238,6 +250,7 @@ final class TabStripView: NSView {
         guard let i = index(at: p) else { return }
         pressedID = items[i].id
         pressPoint = p
+        grabX = p.x - tabRect(i).minX
         dragging = false
         torn = false
     }
@@ -253,15 +266,42 @@ final class TabStripView: NSView {
         torn = !bounds.insetBy(dx: -tearDistance, dy: -tearDistance).contains(p)
         if torn {
             chip.show(items[from], at: NSEvent.mouseLocation)
+            slide[id] = nil
         } else {
             chip.hide()
-            let to = slot(forX: p.x)
+            // The tab follows the pointer along the strip; it takes the slot its
+            // centre is nearest, and the tabs it passes slide out of its way.
+            let x = min(max(p.x - grabX, tabRect(0).minX), tabRect(items.count - 1).minX)
+            let to = slot(forX: x + tabRect(0).width / 2)
             if to != from {
-                let item = items.remove(at: from)
-                items.insert(item, at: to)
+                let was = Dictionary(uniqueKeysWithValues: items.indices.map { (items[$0].id, tabRect($0).minX) })
+                items.insert(items.remove(at: from), at: to)
+                for (i, item) in items.enumerated() where item.id != id {
+                    slide[item.id, default: 0] += was[item.id]! - tabRect(i).minX
+                }
             }
+            slide[id] = x - tabRect(to).minX
+        }
+        animate()
+        needsDisplay = true
+    }
+
+    private func animate() {
+        guard link == nil else { return }
+        link = displayLink(target: self, selector: #selector(tick))
+        link?.add(to: .main, forMode: .common)
+    }
+
+    @objc private func tick(_ link: CADisplayLink) {
+        let k = pow(0.5, (link.targetTimestamp - link.timestamp) / 0.035)   // 35 ms half-life
+        for (id, v) in slide where !(dragging && id == pressedID) {
+            slide[id] = abs(v) < 0.5 ? nil : v * k
         }
         needsDisplay = true
+        if slide.isEmpty && !dragging {
+            link.invalidate()
+            self.link = nil
+        }
     }
 
     override func menu(for event: NSEvent) -> NSMenu? {
@@ -292,6 +332,7 @@ final class TabStripView: NSView {
             dragging = false
             torn = false
             chip.hide()
+            animate()   // the dropped tab glides into its slot
             needsDisplay = true
         }
         guard let id = pressedID, let owner, let delegate = owner.stripDelegate else { return }
@@ -304,6 +345,7 @@ final class TabStripView: NSView {
                 delegate.tabStrip(owner, didSelect: id)
             }
         } else if wasTorn {
+            slide[id] = nil
             delegate.tabStrip(owner, didTearOff: id, at: Coords.cursor())
         } else if let i = items.firstIndex(where: { $0.id == id }) {
             delegate.tabStrip(owner, didMove: id, to: i)
