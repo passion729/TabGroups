@@ -152,6 +152,38 @@ final class GroupManager {
         }
     }
 
+    /// Whether the window owns a native tab bar with at least one tab.
+    private func isTabbedWindow(_ el: AXUIElement) -> Bool {
+        AX.elements(el, kAXChildrenAttribute).contains { tabGroup in
+            guard AX.string(tabGroup, kAXRoleAttribute) == kAXTabGroupRole else { return false }
+            return AX.elements(tabGroup, kAXChildrenAttribute).contains {
+                AX.string($0, kAXRoleAttribute) == kAXRadioButtonRole
+            }
+        }
+    }
+
+    /// `w` went off screen or closed, but its window's native tab group may
+    /// live on at another window element (Finder's tabs): point the group's
+    /// entry at the focused sibling tab instead of dropping the window.
+    private func swapToFocusedTab(_ w: Win, in g: TabGroup) -> Bool {
+        let appEl = AXUIElementCreateApplication(w.pid)
+        guard let fEl = AX.element(appEl, kAXFocusedWindowAttribute),
+              let fid = AX.windowID(fEl), fid != w.id,
+              let fw = tracker.windows[fid], group(of: fid) == nil,
+              isTabbedWindow(fEl) || AX.hasOwnTabs(w.element),
+              let f = fw.frame,
+              g.windowFrame.insetBy(dx: -16, dy: -16).intersects(f),
+              let i = g.tabs.firstIndex(of: w.id)
+        else { return false }
+        g.tabs[i] = fid
+        if g.active == w.id { g.active = fid }
+        if let s = sizeBeforeGrouping.removeValue(forKey: w.id) { sizeBeforeGrouping[fid] = s }
+        if f != g.windowFrame { place(fw, g.windowFrame) }
+        refreshTabs(g)
+        reorderStrip(g)
+        return true
+    }
+
     /// End a group: the last window takes the whole space, strip included;
     /// if several are left (ungroup all / quit) they cascade.
     private func dissolve(_ g: TabGroup) {
@@ -475,9 +507,24 @@ extension GroupManager: WindowTrackerDelegate {
     func windowResized(_ w: Win) { follow(w) }
 
     func windowDestroyed(_ w: Win) {
-        remember(w)
-        sizeBeforeGrouping[w.id] = nil
-        if let g = group(of: w.id) { remove(w.id, from: g) }
+        // A closed native tab leaves its tab group alive, focused at its
+        // sibling. Finder only moves focus just after the destroy: give it a
+        // beat, then let the group follow the sibling. Otherwise the window
+        // is really gone.
+        if let g = group(of: w.id) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self, weak g] in
+                MainActor.assumeIsolated {
+                    guard let self, let g, self.groups.contains(where: { $0 === g }),
+                          g.tabs.contains(w.id), !self.swapToFocusedTab(w, in: g) else { return }
+                    self.remember(w)
+                    self.sizeBeforeGrouping[w.id] = nil
+                    self.remove(w.id, from: g)
+                }
+            }
+        } else {
+            remember(w)
+            sizeBeforeGrouping[w.id] = nil
+        }
     }
 
     func windowAppeared(_ w: Win) {
@@ -520,9 +567,14 @@ extension GroupManager: WindowTrackerDelegate {
                 for g in self.groups where !g.parked && g.tabs.contains(where: onScreen.contains) {
                     for id in g.tabs where !onScreen.contains(id) {
                         guard self.groups.contains(where: { $0 === g }),   // not dissolved meanwhile
-                              let w = self.tracker.windows[id],
-                              NSRunningApplication(processIdentifier: w.pid)?.isHidden == false,
-                              AX.bool(w.element, kAXMinimizedAttribute) != true else { continue }
+                              let w = self.tracker.windows[id] else { continue }
+                        let hidden = NSRunningApplication(processIdentifier: w.pid)?.isHidden ?? true
+                        let min = AX.bool(w.element, kAXMinimizedAttribute) ?? false
+                        guard hidden == false, min != true else { continue }
+                        // Off screen but not closed: a native tab's sibling
+                        // took focus (Finder "Open in New Tab"). Follow it
+                        // instead of dropping the window.
+                        if self.swapToFocusedTab(w, in: g) { continue }
                         self.remember(w)
                         self.remove(id, from: g)
                     }

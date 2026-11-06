@@ -204,7 +204,7 @@ final class WindowTracker {
         case kAXWindowCreatedNotification:
             var pid: pid_t = 0
             AXUIElementGetPid(el, &pid)
-            add(el, pid: pid)
+            _ = add(el, pid: pid)
 
         case kAXFocusedWindowChangedNotification:
             delegate?.focusMoved()
