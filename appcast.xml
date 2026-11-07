@@ -3,6 +3,15 @@
     <channel>
         <title>TabGroups</title>
         <item>
+            <title>0.13</title>
+            <pubDate>Sat, 07 Nov 2026 15:37:12 +0800</pubDate>
+            <sparkle:version>13</sparkle:version>
+            <sparkle:shortVersionString>0.13</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.13/TabGroups-0.13.zip" length="2706019" type="application/octet-stream" sparkle:edSignature="vyjFiVXSh9ziixz7zAWUVznvA3r3MoPaYP8egC/Mtm1psbQM/SfHVnALSS7vfBO8Cc4BS8Ml3gHHKqqdzel5Ag=="/>
+        </item>
+        <item>
             <title>0.12</title>
             <pubDate>Thu, 05 Nov 2026 20:35:51 +0800</pubDate>
             <sparkle:version>12</sparkle:version>
@@ -19,15 +28,6 @@
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
             <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.11/TabGroups-0.11.zip" length="2700557" type="application/octet-stream" sparkle:edSignature="QrpdT4LLDa1zbQQiFRNKW7YMUYrcp7LPeLZrH5dAq5DjPWxO7YSXg7erBhXu/cVpUs6NgYBWvU0huBPd3ErkCA=="/>
-        </item>
-        <item>
-            <title>0.10</title>
-            <pubDate>Thu, 05 Nov 2026 00:58:34 +0800</pubDate>
-            <sparkle:version>10</sparkle:version>
-            <sparkle:shortVersionString>0.10</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
-            <enclosure url="https://github.com/passion729/TabGroups/releases/download/v0.10/TabGroups-0.10.zip" length="2694752" type="application/octet-stream" sparkle:edSignature="qamPtD5KQ4iT1udBZJdnZBF11EwzoTntuX1v648nMP+PGrOEC7eJWyaPWy1gU6Dcb68h3FFVbDwlPpFaxbG/CA=="/>
         </item>
     </channel>
 </rss>
