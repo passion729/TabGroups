@@ -168,7 +168,9 @@ final class WindowTracker {
         }
     }
 
-    private func rescan(_ pid: pid_t) {
+    /// Also for windows that showed without telling: a native tab coming
+    /// back when the one in front of it closes posts nothing.
+    func rescan(_ pid: pid_t) {
         guard let appEl = appElements[pid] else { return }
         for el in AX.elements(appEl, kAXWindowsAttribute) { add(el, pid: pid) }
     }
