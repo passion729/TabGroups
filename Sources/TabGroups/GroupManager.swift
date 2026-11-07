@@ -152,6 +152,95 @@ final class GroupManager {
         }
     }
 
+    /// Native window tabs (Finder, Terminal, Ghostty) are a window each, in
+    /// one shared frame: opening, switching or closing one of them swaps the
+    /// window on screen. If `w` left the screen for a sibling like that (same
+    /// app, same frame, not grouped, on screen), the group's tab follows it.
+    private func handOver(_ w: Win, in g: TabGroup, onScreen: Set<CGWindowID>) -> Win? {
+        let r = g.windowFrame
+        func same(_ f: CGRect) -> Bool {
+            abs(f.minX - r.minX) <= 2 && abs(f.minY - r.minY) <= 2
+                && abs(f.width - r.width) <= 2 && abs(f.height - r.height) <= 2
+        }
+        guard let i = g.tabs.firstIndex(of: w.id),
+              let s = tracker.windows.values.first(where: {
+                  $0.pid == w.pid && $0.id != w.id && onScreen.contains($0.id)
+                      && group(of: $0.id) == nil && $0.serverFrame.map(same) == true
+              })
+        else { return nil }
+        g.tabs[i] = s.id
+        if g.active == w.id { g.active = s.id }
+        if let size = sizeBeforeGrouping.removeValue(forKey: w.id) { sizeBeforeGrouping[s.id] = size }
+        refreshTabs(g)
+        reorderStrip(g)
+        return s
+    }
+
+    /// Grouped windows that left the screen or closed, being looked at again.
+    private var losing: Set<CGWindowID> = []
+    /// Closed from the strip (until when; a "Save changes?" sheet may keep
+    /// it), and whether it had native tabs: its close button only closes the
+    /// shown one, so each sibling that takes its place is closed in turn.
+    /// Without, there's no sibling to wait for.
+    private var closing: [CGWindowID: (until: Date, tabs: Bool)] = [:]
+
+    private func closeWindow(_ w: Win) {
+        closing[w.id] = (Date().addingTimeInterval(3), AX.hasOwnTabs(w.element))
+        w.close()
+    }
+
+    /// `w` left the screen or closed: a native-tab sibling may take its
+    /// place (`handOver`), else it leaves its group. An app working through
+    /// a burst of tab openings and closings stalls for up to a second
+    /// before it shows the sibling (and before we hear of it), so look again
+    /// every 0.1 s for a second before giving up.
+    private func lose(_ w: Win) {
+        guard losing.insert(w.id).inserted else { return }
+        let ours = closing.removeValue(forKey: w.id).flatMap { $0.until > Date() ? $0 : nil }
+        checkLost(w, tries: ours?.tabs == false ? 0 : 10, closingTabs: ours?.tabs == true)
+    }
+
+    private func checkLost(_ w: Win, tries: Int, closingTabs: Bool) {
+        let closed = tracker.windows[w.id] !== w
+        if let g = group(of: w.id) {
+            let onScreen = Set(Self.onScreenOrder())
+            // Back on screen, or out of sight for another reason: ⌘H, the
+            // Dock, the whole group on another Space or parked mid-drag.
+            let fine = !closed && (onScreen.contains(w.id) || g.parked
+                || !g.tabs.contains(where: onScreen.contains)
+                || NSRunningApplication(processIdentifier: w.pid)?.isHidden != false
+                || AX.bool(w.element, kAXMinimizedAttribute) == true)
+            if fine { losing.remove(w.id); return }
+            tracker.rescan(w.pid)
+            if let s = handOver(w, in: g, onScreen: onScreen) {
+                losing.remove(w.id)
+                if closed && closingTabs { closeWindow(s) }
+                return
+            }
+            if tries > 0 {
+                if closed && tries == 10 { refreshTabs(g) }   // its tab goes from the strip meanwhile
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                    MainActor.assumeIsolated { self?.checkLost(w, tries: tries - 1, closingTabs: closingTabs) }
+                }
+                return
+            }
+        }
+        losing.remove(w.id)
+        // Closed: forget it even if its group ended meanwhile (`remember`
+        // keeps its place for a relaunch). Only hidden: it may just be out.
+        let g = group(of: w.id)
+        guard closed || g != nil else { return }
+        remember(w)
+        if closed { sizeBeforeGrouping[w.id] = nil }
+        if let g { remove(w.id, from: g) }
+    }
+
+    /// On-screen windows, front to back.
+    private static func onScreenOrder() -> [CGWindowID] {
+        let list = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]] ?? []
+        return list.compactMap { ($0[kCGWindowNumber as String] as? Int).map { CGWindowID($0) } }
+    }
+
     /// End a group: the last window takes the whole space, strip included;
     /// if several are left (ungroup all / quit) they cascade.
     private func dissolve(_ g: TabGroup) {
@@ -475,9 +564,9 @@ extension GroupManager: WindowTrackerDelegate {
     func windowResized(_ w: Win) { follow(w) }
 
     func windowDestroyed(_ w: Win) {
+        if group(of: w.id) != nil { lose(w); return }
         remember(w)
         sizeBeforeGrouping[w.id] = nil
-        if let g = group(of: w.id) { remove(w.id, from: g) }
     }
 
     func windowAppeared(_ w: Win) {
@@ -508,23 +597,15 @@ extension GroupManager: WindowTrackerDelegate {
         focused = nil   // windowFocused follows when a tracked window has focus
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             MainActor.assumeIsolated {
-                guard let self, !self.groups.isEmpty,
-                      let list = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[String: Any]]
-                else { return }
-                let order = list.compactMap { ($0[kCGWindowNumber as String] as? Int).map { CGWindowID($0) } }
+                guard let self, !self.groups.isEmpty else { return }
+                let order = Self.onScreenOrder()
                 let onScreen = Set(order)
                 // ⌘W often only hides a window (apps that stay open with no
                 // windows, the last in-window tab of a browser): it's closed
-                // as far as the group goes. Not when the app is hidden (⌘H),
-                // nor when the whole group is off screen (another Space).
+                // as far as the group goes (`lose` tells the exceptions).
                 for g in self.groups where !g.parked && g.tabs.contains(where: onScreen.contains) {
                     for id in g.tabs where !onScreen.contains(id) {
-                        guard self.groups.contains(where: { $0 === g }),   // not dissolved meanwhile
-                              let w = self.tracker.windows[id],
-                              NSRunningApplication(processIdentifier: w.pid)?.isHidden == false,
-                              AX.bool(w.element, kAXMinimizedAttribute) != true else { continue }
-                        self.remember(w)
-                        self.remove(id, from: g)
+                        if let w = self.tracker.windows[id] { self.lose(w) }
                     }
                 }
                 // Activating an app (⌘Tab, the Dock) can bring all its windows
@@ -562,8 +643,8 @@ extension GroupManager: TabStripDelegate {
         guard let g = group(for: strip), let w = tracker.windows[id] else { return }
         // Show it first: a "Save changes?" sheet on a parked window would be invisible.
         if g.active != id { select(id, in: g) }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            MainActor.assumeIsolated { w.close() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            MainActor.assumeIsolated { self?.closeWindow(w) }
         }
     }
 
